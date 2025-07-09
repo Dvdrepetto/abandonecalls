@@ -1,11 +1,11 @@
-(function($) {
+(function ($) {
 
     var AbandonedPlugin = {
         abandonedWidgetContainer: null,
         recoveredWidgetContainer: null,
         currentUser: 'unknown',
 
-        start: function() {
+        start: function () {
             // Asigna los contenedores de los DOS widgets basándose en sus IDs
             this.abandonedWidgetContainer = $('#abandonedcalls');
             this.recoveredWidgetContainer = $('#recoveredcalls');
@@ -37,7 +37,7 @@
         },
 
         // Pide los datos de abandonadas y los renderiza en su widget
-        refreshAbandonedWidget: function() {
+        refreshAbandonedWidget: function () {
             if (this.abandonedWidgetContainer.length === 0) return;
             $.ajax({
                 url: 'plugins/abandonedcalls/get_abandoned.php',
@@ -52,7 +52,7 @@
         },
 
         // Pide los datos de recuperadas y los renderiza en su widget
-        refreshRecoveredWidget: function() {
+        refreshRecoveredWidget: function () {
             if (this.recoveredWidgetContainer.length === 0) return;
             $.ajax({
                 url: 'plugins/abandonedcalls/get_recovered.php',
@@ -65,9 +65,9 @@
                 }
             });
         },
-        
+
         // Genera el HTML para la tabla de abandonadas
-        generateAbandonedTableHtml: function(data) {
+        generateAbandonedTableHtml: function (data) {
             if (!data || data.length === 0) return '<p style="text-align:center; padding: 15px;">No hay llamadas abandonadas.</p>';
             var header = '<th>Llamante</th><th>Cola</th><th>Hora</th><th>Acción</th>';
             let table = `<table class="table table-striped table-condensed"><thead><tr>${header}</tr></thead><tbody>`;
@@ -82,9 +82,9 @@
             table += '</tbody></table>';
             return table;
         },
-        
+
         // Genera el HTML para la tabla de recuperadas
-        generateRecoveredTableHtml: function(data) {
+        generateRecoveredTableHtml: function (data) {
             if (!data || data.length === 0) return '<p style="text-align:center; padding: 15px;">No hay llamadas gestionadas.</p>';
             var header = '<th>Llamante</th><th>Agente</th><th>Hora Gestión</th>';
             let table = `<table class="table table-striped table-condensed"><thead><tr>${header}</tr></thead><tbody>`;
@@ -99,7 +99,7 @@
         },
 
         // Marca una llamada como recuperada y fuerza el refresco de ambos widgets
-        recover: function(uniqueid, agentId) {
+        recover: function (uniqueid, agentId) {
             $.ajax({
                 url: 'plugins/abandonedcalls/recover.php',
                 type: 'GET',
@@ -113,5 +113,5 @@
         }
     };
 
-    $(document).ready(function() { AbandonedPlugin.start(); });
+    $(document).ready(function () { AbandonedPlugin.start(); });
 })(jQuery);
