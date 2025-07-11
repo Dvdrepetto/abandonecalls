@@ -185,7 +185,9 @@
                 }
             });
         }
+        
     };
+    
 
     $(document).ready(function() {
         AbandonedPlugin.start();
